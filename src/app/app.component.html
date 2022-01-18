@@ -5,14 +5,18 @@
   <input name="lastName" ngModel #lastName="ngModel"><br>
   <label>Street Address </label>
   <input name="address" ngModel #address="ngModel"><br>
+  <button>Submit Address</button>
+</form>
+<form #i="ngForm" (ngSubmit)="addItem(i)">
   <button>Add Item</button>
   <select name="item" ngModel #item="ngModel">
     <option disabled></option>
     <option *ngFor="let item of items" [ngValue]="item">{{item.itemName}}</option>
   </select>
-  
+  <label>Qty </label>
+  <input name="qty" ngModel #qty="ngModel"><br>
 </form>
 <ul *ngFor="let item of cartItems">
-  <li>{{item.itemName}} <input type='button' value='delete' (click)=removeItem(item)></li>
+  <li>{{item.itemName}} {{item.qty}} {{item.price}} {{item.grossPrice}}<input type='button' value='Delete' (click)=removeItem(item)></li>
 </ul>
 <p>Order for {{customer.firstName}} {{customer.lastName}} at {{customer.address}}</p>

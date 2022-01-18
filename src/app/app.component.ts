@@ -27,34 +27,23 @@ export class AppComponent {
     this.customer.firstName = f.value.firstName;
     this.customer.lastName = f.value.lastName;
     this.customer.address = f.value.address;
-    this.addItem(f.value.item);
   }
 
-  addItem(item:any) {
+  addItem(i: NgForm) {
     let newItem = {
-      'itemName' : item.itemName,
-      'price': item.price,
-      'qty': item.qty
+      'itemName' : i.value.item.itemName,
+      'price': i.value.item.price,
+      'qty': i.value.qty,
+      'itemNum': this.cartItems.length,
+      'grossPrice': i.value.item.price * i.value.qty
     }
     this.cartItems.push(newItem)
   }
 
-  addItems() {
-    let products = [{ 'item': 'Apples', 'price': 2.99 }];
-    for (var i = 0; i < products.length; i++) {
-      let newItem = {
-        'item': products[i].item,
-        'price': products[i].price,
-        'num': i + 1
-      }
-      this.items.push(newItem)
-    }
-  }
-
   removeItem(item: any) {
-    for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].num == item.num) {
-        this.items.splice(i, 1); // remove 1 item at ith place
+    for (var i = 0; i < this.cartItems.length; i++) {
+      if (item.itemNum == i) {
+        this.cartItems.splice(i, 1); // remove 1 item at ith place
       }
     }
   }
