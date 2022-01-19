@@ -18,6 +18,9 @@ export class AppComponent {
   };
 
   cartItems: Array<any>;
+  totals: any = {};
+  taxRate: number = 7;
+  show = true;
 
   constructor() {
     this.cartItems = [];
@@ -27,17 +30,20 @@ export class AppComponent {
     this.customer.firstName = f.value.firstName;
     this.customer.lastName = f.value.lastName;
     this.customer.address = f.value.address;
+    f.resetForm();
   }
 
   addItem(i: NgForm) {
     let newItem = {
-      'itemName' : i.value.item.itemName,
+      'itemName': i.value.item.itemName,
       'price': i.value.item.price,
       'qty': i.value.qty,
       'itemNum': this.cartItems.length,
       'grossPrice': i.value.item.price * i.value.qty
     }
     this.cartItems.push(newItem)
+    this.calculateTotals()
+    i.resetForm();
   }
 
   removeItem(item: any) {
@@ -46,5 +52,16 @@ export class AppComponent {
         this.cartItems.splice(i, 1); // remove 1 item at ith place
       }
     }
+    this.calculateTotals()
   }
+
+  calculateTotals() {
+    this.totals.subtotal = this.cartItems.reduce(function (a, b) {
+      return a + b.grossPrice;
+    }, 0)
+
+    this.totals.totalWTaxes = +(this.totals.subtotal * this.taxRate / 100);
+    this.totals.total = eval(this.totals.subtotal + this.totals.totalWTaxes);
+  }
+
 }
