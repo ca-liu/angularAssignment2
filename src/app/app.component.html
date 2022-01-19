@@ -1,25 +1,29 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
   <label>First Name </label>
-  <input name="firstName" ngModel #firstName="ngModel"><br>
+  <input name="firstName" ngModel #firstName="ngModel" pattern="[a-zA-Z-']*"><br>
   <label>Last Name </label>
-  <input name="lastName" ngModel #lastName="ngModel"><br>
+  <input name="lastName" ngModel #lastName="ngModel" pattern="[a-zA-Z-']*"><br>
   <label>Street Address </label>
-  <input name="address" ngModel #address="ngModel"><br>
+  <input name="address" ngModel #address="ngModel" required><br>
   <button>Submit Address</button>
+  <p *ngIf="firstName?.errors?.['pattern']">Only letters, hypens, and apostrophes are permitted for First Name</p>
+  <p *ngIf="lastName?.errors?.['pattern']">Only letters, hypens, and apostrophes are permittedfor Last Name </p>
+  <p *ngIf="address?.errors?.['required']">Address is required </p>
 </form>
 
 <form #i="ngForm" (ngSubmit)="addItem(i)">
-  <button>Add Item</button>
-  <select name="item" ngModel #item="ngModel">
+  <button [disabled]="!i.form.valid">Add Item</button>
+  <select name="item" ngModel #item="ngModel" required>
     <option disabled></option>
     <option *ngFor="let item of items" [ngValue]="item">{{item.itemName}}</option>
   </select>
   <label>Qty </label>
-  <input name="qty" ngModel #qty="ngModel"><br>
+  <input name="qty" ngModel #qty="ngModel" required><br>
+  <p *ngIf="qty?.errors?.['required']">Quantity is required </p>
 </form>
 
 
-<table>
+<table *ngIf="cartItems.length>0">
   <tr>
     <th></th>
     <th>Qty</th>
@@ -29,28 +33,28 @@
   </tr>
   <tr *ngFor="let item of cartItems">
     <td>{{item.itemName}}</td>
-    <td>{{item.qty}}</td>
+    <td>{{item.qty | number: '1.0-2'}}</td>
     <td>{{item.price}}</td>
-    <td>{{item.grossPrice}}</td>
+    <td>{{item.grossPrice | number: '1.0-2'}}</td>
     <td><input type='button' value='Delete' (click)=removeItem(item)></td>
   </tr>
   <tr>
     <td>Subtotal</td>
     <td></td>
     <td></td>
-    <td>{{totals.subtotal}}</td>
+    <td>{{totals.subtotal | number: '1.0-2'}}</td>
   </tr>
   <tr>
     <td>Taxes 7%</td>
     <td></td>
     <td></td>
-    <td>{{totals.totalWTaxes}}</td>
+    <td>{{totals.totalWTaxes | number: '1.0-2'}}</td>
   </tr>
   <tr>
     <td>Total</td>
     <td></td>
     <td></td>
-    <td>{{totals.total}}</td>
+    <td>${{totals.total | number: '1.0-2'}}</td>
   </tr>
 </table>
 

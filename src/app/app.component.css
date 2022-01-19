@@ -1,0 +1,20 @@
+label {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: hotpink;
+    display:inline-block;
+    width: 120px;
+}
+
+input {
+    width: 150px;
+    display: inline-block;
+}
+
+form {
+    background-color: grey;
+    margin-bottom: 10px;
+}
+
+table {
+    background-color: indigo;
+}

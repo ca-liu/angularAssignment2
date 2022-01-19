@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   items: Array<any> = [{ 'itemName': 'Apples', 'price': 1.99 },
