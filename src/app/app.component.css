@@ -1,8 +1,7 @@
 label {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: hotpink;
+    font-weight: bold;
     display:inline-block;
-    width: 120px;
+    width: 150px;
 }
 
 input {
@@ -11,10 +10,50 @@ input {
 }
 
 form {
-    background-color: grey;
+
     margin-bottom: 10px;
 }
 
+#qty-label{
+    text-align: center;
+}
+
+button {
+    font-weight: bold;
+}
+
+#delete {
+    padding: 0;
+    border: none;
+    background:none;
+    text-decoration: underline;
+}
+
+#underline {
+    border-top: 1px solid black;
+    
+}
+
+#underline-end{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
 table {
-    background-color: indigo;
+    width: 60%;
+    table-layout: fixed;
+    overflow-wrap: break-word;
+}
+
+td {
+    text-align: end;
+    width: 80px
+}
+
+th {
+    text-align: end;
+}
+
+#title{
+    text-align:left;
 }

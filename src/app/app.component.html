@@ -17,7 +17,7 @@
     <option disabled></option>
     <option *ngFor="let item of items" [ngValue]="item">{{item.itemName}}</option>
   </select>
-  <label>Qty </label>
+  <label id="qty-label">Qty </label>
   <input name="qty" ngModel #qty="ngModel" required><br>
   <p *ngIf="qty?.errors?.['required']">Quantity is required </p>
 </form>
@@ -32,29 +32,29 @@
     <th></th>
   </tr>
   <tr *ngFor="let item of cartItems">
-    <td>{{item.itemName}}</td>
+    <td id="title">{{item.itemName}}</td>
     <td>{{item.qty | number: '1.0-2'}}</td>
     <td>{{item.price}}</td>
     <td>{{item.grossPrice | number: '1.0-2'}}</td>
-    <td><input type='button' value='Delete' (click)=removeItem(item)></td>
+    <td><input type='button' value='Delete' (click)=removeItem(item) id="delete"></td>
   </tr>
   <tr>
-    <td>Subtotal</td>
+    <td id="title">Subtotal</td>
     <td></td>
     <td></td>
-    <td>{{totals.subtotal | number: '1.0-2'}}</td>
+    <td id="underline">{{totals.subtotal | number: '1.0-2'}}</td>
   </tr>
   <tr>
-    <td>Taxes 7%</td>
+    <td id="title">Taxes 7%</td>
     <td></td>
     <td></td>
-    <td>{{totals.totalWTaxes | number: '1.0-2'}}</td>
+    <td id="underline">{{totals.totalWTaxes | number: '1.0-2'}}</td>
   </tr>
   <tr>
-    <td>Total</td>
+    <td id="title">Total</td>
     <td></td>
     <td></td>
-    <td>${{totals.total | number: '1.0-2'}}</td>
+    <td id="underline-end">${{totals.total | number: '1.0-2'}}</td>
   </tr>
 </table>
 
