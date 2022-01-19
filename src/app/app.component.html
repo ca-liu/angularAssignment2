@@ -6,58 +6,58 @@
   <label>Street Address </label>
   <input name="address" ngModel #address="ngModel" required><br>
   <button>Submit Address</button>
+</form>
   <p *ngIf="firstName?.errors?.['pattern']">Only letters, hypens, and apostrophes are permitted for First Name</p>
   <p *ngIf="lastName?.errors?.['pattern']">Only letters, hypens, and apostrophes are permittedfor Last Name </p>
-  <p *ngIf="address?.errors?.['required']">Address is required </p>
-</form>
+  <p *ngIf="address?.errors?.['required'] && (address.dirty || address.touched)">Address is required </p>
 
-<form #i="ngForm" (ngSubmit)="addItem(i)">
-  <button [disabled]="!i.form.valid">Add Item</button>
-  <select name="item" ngModel #item="ngModel" required>
-    <option disabled></option>
-    <option *ngFor="let item of items" [ngValue]="item">{{item.itemName}}</option>
-  </select>
-  <label id="qty-label">Qty </label>
-  <input name="qty" ngModel #qty="ngModel" required><br>
-  <p *ngIf="qty?.errors?.['required']">Quantity is required </p>
-</form>
-
-
-<table *ngIf="cartItems.length>0">
-  <tr>
-    <th></th>
-    <th>Qty</th>
-    <th>Unit Price</th>
-    <th>Amount</th>
-    <th></th>
-  </tr>
-  <tr *ngFor="let item of cartItems">
-    <td id="title">{{item.itemName}}</td>
-    <td>{{item.qty | number: '1.0-2'}}</td>
-    <td>{{item.price}}</td>
-    <td>{{item.grossPrice | number: '1.0-2'}}</td>
-    <td><input type='button' value='Delete' (click)=removeItem(item) id="delete"></td>
-  </tr>
-  <tr>
-    <td id="title">Subtotal</td>
-    <td></td>
-    <td></td>
-    <td id="underline">{{totals.subtotal | number: '1.0-2'}}</td>
-  </tr>
-  <tr>
-    <td id="title">Taxes 7%</td>
-    <td></td>
-    <td></td>
-    <td id="underline">{{totals.totalWTaxes | number: '1.0-2'}}</td>
-  </tr>
-  <tr>
-    <td id="title">Total</td>
-    <td></td>
-    <td></td>
-    <td id="underline-end">${{totals.total | number: '1.0-2'}}</td>
-  </tr>
-</table>
+  <form #i="ngForm" (ngSubmit)="addItem(i)">
+    <button [disabled]="!i.form.valid">Add Item</button>
+    <select name="item" ngModel #item="ngModel" required>
+      <option disabled></option>
+      <option *ngFor="let item of items" [ngValue]="item">{{item.itemName}}</option>
+    </select>
+    <label id="qty-label">Qty </label>
+    <input name="qty" ngModel #qty="ngModel" required><br>
+  </form>
+  <p *ngIf="qty?.errors?.['required'] && (qty.dirty || qty.touched)">Quantity is required </p>
 
 
-<p *ngIf="customer.firstName && customer.lastName && customer.address">Order for {{customer.firstName}}
-  {{customer.lastName}} at {{customer.address}}</p>
+  <table *ngIf="cartItems.length>0">
+    <tr>
+      <th></th>
+      <th>Qty</th>
+      <th>Unit Price</th>
+      <th>Amount</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let item of cartItems">
+      <td id="title">{{item.itemName}}</td>
+      <td>{{item.qty | number: '1.0-2'}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.grossPrice | number: '1.0-2'}}</td>
+      <td><input type='button' value='Delete' (click)=removeItem(item) id="delete"></td>
+    </tr>
+    <tr>
+      <td id="title">Subtotal</td>
+      <td></td>
+      <td></td>
+      <td id="underline">{{totals.subtotal | number: '1.0-2'}}</td>
+    </tr>
+    <tr>
+      <td id="title">Taxes 7%</td>
+      <td></td>
+      <td></td>
+      <td id="underline">{{totals.totalWTaxes | number: '1.0-2'}}</td>
+    </tr>
+    <tr>
+      <td id="title">Total</td>
+      <td></td>
+      <td></td>
+      <td id="underline-end">${{totals.total | number: '1.0-2'}}</td>
+    </tr>
+  </table>
+
+
+  <p *ngIf="customer.firstName && customer.lastName && customer.address">Order for {{customer.firstName}}
+    {{customer.lastName}} at {{customer.address}}</p>
